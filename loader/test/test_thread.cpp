@@ -24,26 +24,30 @@
 using namespace std;
 using namespace nervana;
 
-TEST(thread, thread_pool)
+TEST(thread, basic_function)
 {
-    cout << "hello from thread test" << endl;
     class test_pool : public thread_pool
     {
     public:
         test_pool(int count) :
-            thread_pool{count}
+            thread_pool{count},
+            tick(0)
         {
         }
         void work(int id) override
         {
+            tick++;
         }
+
+        size_t tick;
     };
 
 
     test_pool tp1{1};
 
     tp1.start();
-    usleep(2000);
+    usleep(10000);
     tp1.stop();
-//    tp1.join();
+
+    EXPECT_LT(0, tp1.tick);
 }
