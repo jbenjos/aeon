@@ -21,9 +21,9 @@ include ../Makefile.base
 # specific to TEST
 
 TEST_SRCS := \
-    buffer_test.cpp \
+    test_buffer.cpp \
     csv_manifest_maker.cpp \
-    csv_manifest_test.cpp \
+    test_manifest_csv.cpp \
     gen_image.cpp \
     helpers.cpp \
     main.cpp \

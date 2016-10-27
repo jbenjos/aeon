@@ -141,14 +141,13 @@ int block_loader_cpio_cache::rm(const char *path, const struct stat *s, int flag
 {
     // see http://stackoverflow.com/a/1149837/2093984
     // Call unlink or rmdir on the path, as appropriate.
-    int (*rm_func)(const char *);
+    int status;
 
     switch(flag) {
-        default:     rm_func = unlink; break;
-        case FTW_DP: rm_func = rmdir;
+        default:     status = unlink(path); break;
+        case FTW_DP: status = rmdir (path);
     }
 
-    int status = rm_func(path);
     if(status != 0) {
         stringstream message;
         message << "error deleting file " << path;
